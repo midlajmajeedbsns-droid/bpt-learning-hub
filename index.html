@@ -7,31 +7,72 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Georgia,serif;background:#0a1f44;color:#fff}
-header{text-align:center;padding:40px 20px 20px;border-bottom:2px solid #d4af37}
+header{text-align:center;padding:40px 20px 20px;border-bottom:2px solid #d4af37;cursor:pointer}
 h1{color:#d4af37;font-size:30px;margin:0 0 8px;letter-spacing:1px}
 header p{margin:4px 0;font-size:16px;color:#e8e8e8}
-h2{text-align:center;color:#d4af37;font-size:22px;margin:28px 0 16px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 16px 40px;max-width:700px;margin:0 auto}
-.card{background:#fff;color:#0a1f44;border-radius:14px;padding:22px 12px;text-align:center;border-top:5px solid #d4af37;font-size:17px;font-weight:bold;min-height:110px;display:flex;flex-direction:column;justify-content:center}
+h2{text-align:center;color:#d4af37;font-size:22px;margin:28px 0 16px;padding:0 16px}
+.wrap{max-width:700px;margin:0 auto;padding:0 16px 40px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{background:#fff;color:#0a1f44;border-radius:14px;padding:22px 12px;text-align:center;border-top:5px solid #d4af37;font-size:17px;font-weight:bold;min-height:110px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;border-left:0;border-right:0;border-bottom:0;font-family:inherit;width:100%}
 .card small{display:block;margin-top:8px;font-weight:normal;font-size:12px;color:#666}
+.book{display:block;background:#fff;color:#0a1f44;border-radius:14px;padding:20px;margin-bottom:16px;border-left:6px solid #0a1f44;text-align:left;width:100%;font-family:inherit;cursor:pointer;border-top:0;border-right:0;border-bottom:0}
+.book b{font-size:18px;display:block;margin-bottom:6px}
+.book span{font-size:14px;color:#555}
+.book.main{background:#fff8e1;border-left:6px solid #d4af37;box-shadow:0 0 0 3px #d4af37}
+.tag{display:inline-block;background:#d4af37;color:#0a1f44;font-size:11px;font-weight:bold;padding:3px 8px;border-radius:20px;margin-bottom:8px}
+.back{background:none;border:1px solid #d4af37;color:#d4af37;padding:8px 16px;border-radius:20px;font-size:15px;font-family:inherit;margin:20px 0 0;cursor:pointer}
+.note{text-align:center;color:#aab;font-size:13px;margin-top:20px}
 footer{text-align:center;padding:20px;font-size:12px;color:#aab}
+.hidden{display:none}
 </style>
 </head>
 <body>
-<header>
+<header onclick="showHome()">
 <h1>BPT LEARNING HUB</h1>
 <p>Bachelor of Physiotherapy</p>
 <p>First Year Study Platform</p>
 </header>
+
+<div class="wrap" id="home">
 <h2>First Year Subjects</h2>
 <div class="grid">
-<div class="card">Anatomy<small>Coming soon</small></div>
-<div class="card">Physiology<small>Coming soon</small></div>
-<div class="card">Psychology<small>Coming soon</small></div>
-<div class="card">Sociology<small>Coming soon</small></div>
-<div class="card">Fundamentals of Healthcare<small>Coming soon</small></div>
-<div class="card">Electrotherapy<small>Coming soon</small></div>
+<button class="card" onclick="showBooks('Anatomy')">Anatomy<small>3 books</small></button>
+<button class="card" onclick="showBooks('Physiology')">Physiology<small>3 books</small></button>
+<button class="card" onclick="showBooks('Psychology')">Psychology<small>3 books</small></button>
+<button class="card" onclick="showBooks('Sociology')">Sociology<small>3 books</small></button>
+<button class="card" onclick="showBooks('Fundamentals of Healthcare')">Fundamentals of Healthcare<small>3 books</small></button>
+<button class="card" onclick="showBooks('Electrotherapy')">Electrotherapy<small>3 books</small></button>
 </div>
+</div>
+
+<div class="wrap hidden" id="books">
+<button class="back" onclick="showHome()">&larr; Back to Subjects</button>
+<h2 id="subjectTitle"></h2>
+<button class="book" onclick="soon()"><b>Reference Book 1</b><span>Content will be added soon</span></button>
+<button class="book" onclick="soon()"><b>Reference Book 2</b><span>Content will be added soon</span></button>
+<button class="book main" onclick="soon()"><span class="tag">RECOMMENDED</span><b>Main Study Book</b><span>Exam-focused notes, questions and MCQs. Coming soon</span></button>
+<p class="note" id="msg"></p>
+</div>
+
 <footer>BPT Learning Hub</footer>
+
+<script>
+function showBooks(name){
+document.getElementById('home').classList.add('hidden');
+document.getElementById('books').classList.remove('hidden');
+document.getElementById('subjectTitle').textContent=name;
+document.getElementById('msg').textContent='';
+window.scrollTo(0,0);
+}
+function showHome(){
+document.getElementById('books').classList.add('hidden');
+document.getElementById('home').classList.remove('hidden');
+window.scrollTo(0,0);
+}
+function soon(){
+document.getElementById('msg').textContent='This book is not available yet. Chapters will be added in the next stages.';
+}
+</script>
 </body>
 </html>
+
