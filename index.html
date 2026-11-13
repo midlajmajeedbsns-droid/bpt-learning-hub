@@ -63,6 +63,15 @@ document.getElementById('home').classList.add('hidden');
 document.getElementById('books').classList.remove('hidden');
 document.getElementById('subjectTitle').textContent=name;
 document.getElementById('msg').textContent='';
+  var b1=document.querySelectorAll('#books .book')[0];
+if(name==='Anatomy'){
+b1.onclick=function(){location.href='anatomy-book-a.html';};
+b1.innerHTML='<b>BOOK A &middot; B.D. Chaurasia&rsquo;s Human Anatomy</b><span>Volume 4 &middot; 8th Edition &middot; Brain &ndash; Neuroanatomy</span>';
+}else{
+b1.onclick=soon;
+b1.innerHTML='<b>Reference Book 1</b><span>Content will be added soon</span>';
+}
+
 window.scrollTo(0,0);
 }
 function showHome(){
