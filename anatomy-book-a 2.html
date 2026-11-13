@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book A - Brain and Neuroanatomy | BPT Learning Hub</title>
+<style>
+*{box-sizing:border-box}
+:root{--navy:#0a1f44;--navy2:#13306a;--gold:#d4af37;--cream:#fff8e1;--ink:#1b2438;--mut:#5b6478}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Georgia,"Times New Roman",serif;background:#eef1f7;color:var(--ink);line-height:1.65}
+.top{position:sticky;top:0;z-index:20;background:var(--navy);border-bottom:2px solid var(--gold);display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px}
+.top a,.top button{color:var(--gold);text-decoration:none;font-family:inherit;font-size:14px;background:none;border:1px solid var(--gold);border-radius:20px;padding:6px 12px;cursor:pointer;white-space:nowrap}
+.top .ttl{color:#fff;font-size:14px;text-align:center;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wrap{max-width:860px;margin:0 auto;padding:18px 14px 60px}
+.hidden{display:none}
+h1,h2,h3{color:var(--navy);line-height:1.3}
+h2{font-size:22px;margin:22px 0 10px}
+h3{font-size:18px;margin:0 0 8px}
+.notice{background:#fff3cd;border-left:5px solid var(--gold);padding:10px 14px;border-radius:8px;font-size:14px;margin:14px 0;color:#4a3b00}
+/* card view */
+.bookcard{display:flex;gap:18px;background:#fff;border-radius:16px;padding:18px;box-shadow:0 6px 22px rgba(10,31,68,.15);border-top:6px solid var(--gold);align-items:center;flex-wrap:wrap;justify-content:center}
+.cover{width:190px;aspect-ratio:3/4.2;background:linear-gradient(160deg,var(--navy2),var(--navy));border:3px solid var(--gold);border-radius:6px 12px 12px 6px;box-shadow:6px 6px 16px rgba(0,0,0,.35),inset 8px 0 0 rgba(0,0,0,.25);color:#fff;text-align:center;padding:16px 12px;display:flex;flex-direction:column;justify-content:space-between;flex:none}
+.cover .a{color:var(--gold);font-size:11px;letter-spacing:2px}
+.cover .t{font-size:17px;font-weight:bold;line-height:1.25}
+.cover .v{color:var(--gold);font-size:13px;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);padding:6px 0;margin:6px 0}
+.cover .s{font-size:15px;font-style:italic}
+.cover .e{font-size:11px;color:#c9d3ea}
+.info{flex:1;min-width:230px}
+.badge{display:inline-block;background:var(--gold);color:var(--navy);font-weight:bold;font-size:12px;padding:3px 10px;border-radius:20px;letter-spacing:1px}
+.info h1{font-size:23px;margin:8px 0 4px}
+.info p{margin:3px 0;color:var(--mut);font-size:15px}
+.btn{display:inline-block;margin-top:14px;background:var(--navy);color:var(--gold);border:2px solid var(--gold);border-radius:30px;padding:12px 22px;font-family:inherit;font-size:16px;font-weight:bold;cursor:pointer}
+.btn:active{transform:scale(.98)}
+/* toc */
+.toc{list-style:none;margin:0;padding:0}
+.toc li{margin:0 0 10px}
+.toc button{width:100%;text-align:left;background:#fff;border:0;border-left:6px solid var(--gold);border-radius:12px;padding:14px;font-family:inherit;font-size:16px;color:var(--navy);cursor:pointer;box-shadow:0 2px 8px rgba(10,31,68,.1);display:flex;gap:12px;align-items:center}
+.toc .no{flex:none;width:34px;height:34px;border-radius:50%;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px}
+.toc .st{display:block;font-size:12px;color:var(--mut);margin-top:2px}
+/* chapter */
+.chhead{background:linear-gradient(160deg,var(--navy2),var(--navy));color:#fff;border-radius:14px;padding:20px;border-bottom:4px solid var(--gold)}
+.chhead .n{color:var(--gold);letter-spacing:2px;font-size:12px}
+.chhead h1{color:#fff;margin:4px 0 0;font-size:24px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}
+.chips button{background:#fff;border:1px solid var(--navy);color:var(--navy);border-radius:20px;padding:5px 10px;font-family:inherit;font-size:12.5px;cursor:pointer}
+.sec{background:#fff;border-radius:14px;padding:16px;margin:14px 0;box-shadow:0 2px 10px rgba(10,31,68,.08);scroll-margin-top:70px}
+.sec h2{margin:0 0 10px;font-size:19px;border-bottom:2px solid var(--gold);padding-bottom:6px}
+.sec h3{font-size:16.5px;margin-top:14px}
+.sec ul{margin:6px 0 6px 20px;padding:0}
+.sec li{margin:4px 0}
+.term{display:flex;gap:10px;border-bottom:1px dashed #ccd;padding:7px 0}
+.term b{flex:0 0 38%;color:var(--navy)}
+.def{background:var(--cream);border-left:5px solid var(--gold);padding:8px 12px;border-radius:8px;margin:8px 0}
+.ph{border:2px dashed var(--gold);border-radius:12px;padding:18px;text-align:center;color:var(--mut);background:#fffdf5;font-size:14px}
+.sec img{max-width:100%;border-radius:8px}
+.q{border:1px solid #d6dbe8;border-radius:12px;padding:12px;margin:10px 0}
+.q p{margin:0 0 8px;font-weight:bold}
+.opt{display:block;width:100%;text-align:left;margin:5px 0;padding:10px 12px;border:1px solid #bcc4d8;border-radius:10px;background:#fff;font-family:inherit;font-size:15px;cursor:pointer}
+.opt.right{background:#d9f5df;border-color:#2e9e4f}
+.opt.wrong{background:#fde0e0;border-color:#c33}
+.exp{margin-top:8px;font-size:14px;color:#244;background:#eef6ff;border-radius:8px;padding:8px 10px}
+.score{font-weight:bold;color:var(--navy);margin-top:8px}
+.nav{display:flex;gap:8px;justify-content:space-between;margin:20px 0;flex-wrap:wrap}
+.nav button{flex:1;min-width:120px;background:var(--navy);color:var(--gold);border:2px solid var(--gold);border-radius:30px;padding:11px 10px;font-family:inherit;font-size:14.5px;cursor:pointer}
+.nav button.idx{background:#fff;color:var(--navy);border-color:var(--navy)}
+.nav button:disabled{opacity:.35;cursor:default}
+.src{font-size:12.5px;color:var(--mut)}
+@media(min-width:700px){.cover{width:210px}.info h1{font-size:27px}}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a href="index.html">&larr; Subjects</a>
+  <div class="ttl" id="barTitle">Anatomy &middot; Book A</div>
+  <button id="barIndex" onclick="go('toc')">Index</button>
+</div>
+
+<div class="wrap">
+  <div id="vCard">
+    <h2>Anatomy &middot; Book A</h2>
+    <div class="bookcard">
+      <div class="cover" aria-label="Placeholder cover for Book A">
+        <div class="a">BPT LEARNING HUB</div>
+        <div>
+          <div class="t">B.D. Chaurasia&rsquo;s<br>Human Anatomy</div>
+          <div class="v">VOLUME 4</div>
+          <div class="s">Brain &ndash; Neuroanatomy</div>
+        </div>
+        <div class="e">8th Edition</div>
+      </div>
+      <div class="info">
+        <span class="badge">BOOK A</span>
+        <h1>B.D. Chaurasia&rsquo;s Human Anatomy</h1>
+        <p><b>8th Edition &middot; Volume 4</b></p>
+        <p>Brain &ndash; Neuroanatomy</p>
+        <p>Category: Regional and Applied Anatomy</p>
+        <button class="btn" onclick="go('toc')">OPEN COMPLETE BOOK</button>
+      </div>
+    </div>
+    <div class="notice">
+      <b>About this edition of Book A.</b> The cover shown is a placeholder designed for this site. It is not the publisher&rsquo;s cover. It can be replaced by the site owner with a licensed image. Study notes in this book are original summaries written for BPT students. They are not the text of the printed textbook.
+    </div>
+  </div>
+
+  <div id="vToc" class="hidden">
+    <h2>Book A &ndash; Table of Contents</h2>
+    <div class="notice">
+      Chapter titles follow the list supplied by the site owner. They could not be checked against the printed book, so page numbers are not shown. Subtopics inside each chapter are <b>supplementary study topics</b>, not the textbook&rsquo;s own headings.
+    </div>
+    <ul class="toc" id="tocList"></ul>
+  </div>
+
+  <div id="vChap" class="hidden"></div>
+</div>
+
+<script>
+var CH = [
+{n:1,t:"Introduction",
+intro:"This chapter sets up the vocabulary of neuroanatomy: how the nervous system is divided, what its cells are, and how the brain develops. Every later chapter builds on these ideas.",
+notes:[
+{h:"Divisions of the nervous system",p:["Central nervous system (CNS): brain and spinal cord.","Peripheral nervous system (PNS): 12 pairs of cranial nerves and 31 pairs of spinal nerves with their ganglia.","Autonomic nervous system (ANS): sympathetic and parasympathetic parts, with components in both CNS and PNS."]},
+{h:"Neurons and neuroglia",p:["A neuron has a cell body (soma), dendrites that receive input and one axon that conducts output.","Types by shape: multipolar, bipolar and pseudounipolar (dorsal root ganglion cells).","CNS glia: astrocytes (support, blood-brain barrier), oligodendrocytes (myelin), microglia (phagocytes), ependymal cells (line ventricles).","PNS glia: Schwann cells (myelin) and satellite cells."]},
+{h:"Grey matter, white matter and naming",p:["Grey matter = cell bodies; white matter = myelinated fibres.","A collection of cell bodies is a nucleus in the CNS and a ganglion in the PNS.","A bundle of fibres is a tract in the CNS and a nerve in the PNS.","Fibres crossing the midline form a decussation or a commissure."]},
+{h:"Parts of the brain",p:["Forebrain: cerebrum (telencephalon) and diencephalon.","Midbrain.","Hindbrain: pons, medulla oblongata and cerebellum."]}],
+terms:[["Neuron","Structural and functional unit of the nervous system."],["Synapse","Junction where one neuron passes a signal to another cell."],["Nucleus","Collection of nerve cell bodies inside the CNS."],["Ganglion","Collection of nerve cell bodies outside the CNS."],["Tract","Bundle of nerve fibres with a common origin and destination inside the CNS."],["Decussation","Crossing of fibres from one side to the other, forming an X pattern."],["Commissure","Bundle of fibres joining corresponding parts of the two sides."]],
+clin:["Multiple sclerosis is a demyelinating disease of the CNS, where oligodendrocytes are the affected cells.","Guillain-Barre syndrome damages peripheral myelin made by Schwann cells.","Gliomas, such as astrocytomas, are brain tumours arising from glial cells."],
+pts:["CNS myelin comes from oligodendrocytes; PNS myelin from Schwann cells.","Grey matter is mostly deep in the brainstem and spinal cord, and on the surface of the cerebrum and cerebellum.","There are 31 pairs of spinal nerves: 8 cervical, 12 thoracic, 5 lumbar, 5 sacral and 1 coccygeal."],
+mcq:[{q:"Myelin sheath in the CNS is formed by:",o:["Schwann cells","Oligodendrocytes","Astrocytes","Microglia"],a:1,e:"Oligodendrocytes myelinate CNS axons. Schwann cells do so in the PNS."},{q:"How many pairs of spinal nerves are there?",o:["12","31","33","24"],a:1,e:"8 cervical + 12 thoracic + 5 lumbar + 5 sacral + 1 coccygeal = 31."},{q:"The resident macrophage of the CNS is the:",o:["Astrocyte","Microglial cell","Ependymal cell","Oligodendrocyte"],a:1,e:"Microglia are the phagocytic immune cells of the CNS."}],
+sa:["Classify neurons on the basis of their shape.","List the types of neuroglia in the CNS with one function of each.","Differentiate a nucleus from a ganglion."],
+es:["Describe the divisions of the nervous system and the parts of the brain."]},
+
+{n:2,t:"Meninges of the Brain and Cerebrospinal Fluid",
+intro:"The brain and spinal cord are wrapped in three membranes and cushioned by cerebrospinal fluid (CSF). This chapter is high yield for clinical anatomy of head injury and lumbar puncture.",
+notes:[
+{h:"The three meninges",p:["Dura mater: tough outer layer. In the cranium it has an outer periosteal and an inner meningeal layer, which separate to form the dural venous sinuses.","Arachnoid mater: thin, avascular, spider-web-like layer. The subarachnoid space lies deep to it and contains CSF.","Pia mater: delicate layer closely adherent to the brain and spinal cord surface, carrying small vessels."]},
+{h:"Dural folds",p:["Falx cerebri: between the two cerebral hemispheres.","Tentorium cerebelli: between the occipital lobes and the cerebellum.","Falx cerebelli: partly separates the cerebellar hemispheres.","Diaphragma sellae: roofs the pituitary fossa."]},
+{h:"Spaces and supply",p:["Extradural (epidural), subdural and subarachnoid spaces. Only the subarachnoid space is a normal space with fluid.","Middle meningeal artery (branch of maxillary artery) enters through the foramen spinosum and supplies most of the dura.","Dural sensory supply is mainly from the trigeminal nerve."]},
+{h:"Cerebrospinal fluid",p:["Formed mainly by the choroid plexuses of the ventricles. Total volume is about 150 mL; formation is about 500 mL a day.","Flow: lateral ventricles, interventricular foramen, third ventricle, cerebral aqueduct, fourth ventricle, median and lateral apertures, subarachnoid space, arachnoid granulations, superior sagittal sinus.","Functions: mechanical cushioning, buoyancy, chemical stability and removal of waste."]}],
+terms:[["Cistern","Local enlargement of the subarachnoid space, for example the cerebellomedullary cistern (cisterna magna)."],["Arachnoid granulation","Projection of arachnoid into a dural venous sinus through which CSF returns to blood."],["Choroid plexus","Fold of pia with capillaries and ependyma that secretes CSF."],["Pterion","H-shaped sutural junction on the side of the skull, overlying the anterior branch of the middle meningeal artery."]],
+clin:["Extradural haemorrhage: tear of the middle meningeal artery after a blow at the pterion; classically a lucid interval is followed by deterioration.","Subdural haemorrhage: tear of bridging veins, common in elderly people and infants.","Subarachnoid haemorrhage: often due to a ruptured berry aneurysm; sudden severe headache.","Hydrocephalus: blocked or poorly absorbed CSF causing enlarged ventricles.","Meningitis: inflammation of the leptomeninges; neck stiffness and fever."],
+pts:["The arachnoid and pia together are called leptomeninges.","Adult lumbar puncture is done at L3-L4 or L4-L5 because the spinal cord ends higher.","The subdural space is only a potential space."],
+mcq:[{q:"Arachnoid granulations drain CSF into the:",o:["Superior sagittal sinus","Straight sinus","Cavernous sinus","Sigmoid sinus"],a:0,e:"Arachnoid granulations project mainly into the superior sagittal sinus."},{q:"Extradural haemorrhage after temporal bone fracture is usually from the:",o:["Middle meningeal artery","Bridging veins","Berry aneurysm","Vertebral artery"],a:0,e:"The anterior branch of the middle meningeal artery lies under the pterion."},{q:"CSF is mainly produced by the:",o:["Arachnoid villi","Choroid plexus","Pia mater","Cerebral aqueduct"],a:1,e:"Choroid plexuses of the lateral, third and fourth ventricles secrete most CSF."}],
+sa:["Name the dural folds and state the position of each.","Trace the circulation of CSF.","Write the clinical importance of the pterion."],
+es:["Describe the meninges of the brain. Add a note on extradural and subdural haemorrhage."]},
+
+{n:3,t:"Spinal Cord",
+intro:"The spinal cord is the conduit between the brain and the body. Understanding its levels, internal structure and tracts is essential for localising lesions in physiotherapy practice.",
+notes:[
+{h:"External features",p:["Extends from the foramen magnum to the lower border of L1 in adults (about L3 in the newborn).","Ends as the conus medullaris; the filum terminale anchors it to the coccyx. The nerve roots below form the cauda equina.","Cervical enlargement (C4-T1) supplies the upper limb; lumbosacral enlargement (L2-S3) supplies the lower limb.","31 segments: 8 cervical, 12 thoracic, 5 lumbar, 5 sacral, 1 coccygeal."]},
+{h:"Internal structure",p:["Grey matter is H-shaped: dorsal (sensory) horn, ventral (motor) horn and a lateral horn at T1-L2 (sympathetic) and S2-S4 (parasympathetic).","The central canal runs through the grey commissure.","White matter is divided into dorsal, lateral and ventral funiculi."]},
+{h:"Ascending tracts",p:["Dorsal columns (fasciculus gracilis and cuneatus): fine touch, vibration and conscious proprioception; fibres cross in the medulla.","Lateral spinothalamic tract: pain and temperature; fibres cross in the cord within a segment or two.","Anterior spinothalamic tract: crude touch and pressure.","Spinocerebellar tracts: unconscious proprioception to the cerebellum."]},
+{h:"Descending tracts",p:["Lateral corticospinal tract: voluntary movement; crosses at the pyramidal decussation.","Anterior corticospinal tract: mostly uncrossed until it reaches the cord segment.","Rubrospinal, reticulospinal, vestibulospinal and tectospinal tracts: tone, posture and reflexes."]}],
+terms:[["Conus medullaris","Tapering lower end of the spinal cord."],["Cauda equina","Bundle of lumbar and sacral nerve roots below the conus."],["Funiculus","Major division of white matter of the cord."],["Upper motor neuron (UMN)","Neuron in the cortex or brainstem that controls lower motor neurons."],["Lower motor neuron (LMN)","Anterior horn cell and its axon to muscle."]],
+clin:["Brown-Sequard syndrome (hemisection): ipsilateral loss of motor function and dorsal column sensation below the lesion, and contralateral loss of pain and temperature.","Syringomyelia: cavity near the central canal damaging crossing spinothalamic fibres; bilateral loss of pain and temperature in a cape distribution.","Poliomyelitis: destruction of anterior horn cells, giving LMN paralysis.","UMN lesion: spastic paralysis, hyperreflexia, upgoing plantar. LMN lesion: flaccid paralysis, wasting, hyporeflexia."],
+pts:["Spinothalamic fibres cross early; dorsal column fibres cross late in the medulla.","The lumbar cistern below L1 is the safe site for lumbar puncture.","Lateral horn cells exist only at T1-L2 and S2-S4."],
+mcq:[{q:"In an adult the spinal cord ends at the:",o:["Lower border of T12","Lower border of L1","Lower border of L3","Second sacral vertebra"],a:1,e:"The conus medullaris lies at about the lower border of L1 in adults."},{q:"Pain and temperature sensations are carried by the:",o:["Fasciculus gracilis","Lateral spinothalamic tract","Dorsal spinocerebellar tract","Lateral corticospinal tract"],a:1,e:"The lateral spinothalamic tract carries pain and temperature."},{q:"In Brown-Sequard syndrome, loss of pain and temperature below the lesion is on the:",o:["Same side","Opposite side","Both sides","Neither side"],a:1,e:"Spinothalamic fibres have already crossed, so loss is contralateral."}],
+sa:["Describe the extent and termination of the spinal cord.","Write the course of the dorsal column pathway.","Differentiate UMN from LMN lesions."],
+es:["Describe the internal structure of the spinal cord with the ascending and descending tracts."]},
+
+{n:4,t:"Cranial Nerves",
+intro:"There are 12 pairs of cranial nerves. For each, the student should know the components, nuclei, course, exit foramen, supply and effects of damage.",
+notes:[
+{h:"The twelve nerves at a glance",p:["I Olfactory (smell), II Optic (vision), III Oculomotor (most eye muscles, pupil constriction), IV Trochlear (superior oblique), V Trigeminal (face sensation, mastication), VI Abducent (lateral rectus).","VII Facial (facial expression, taste of anterior two-thirds of tongue, lacrimal and salivary glands), VIII Vestibulocochlear (hearing, balance).","IX Glossopharyngeal, X Vagus, XI Accessory (sternocleidomastoid and trapezius), XII Hypoglossal (tongue muscles)."]},
+{h:"Exit from the skull",p:["Optic canal: II. Superior orbital fissure: III, IV, V1, VI.","Foramen rotundum: V2. Foramen ovale: V3.","Internal acoustic meatus: VII and VIII.","Jugular foramen: IX, X, XI. Hypoglossal canal: XII."]},
+{h:"Functional components",p:["Sensory: general somatic afferent, general visceral afferent, special visceral afferent (taste, smell) and special somatic afferent (vision, hearing, balance).","Motor: general somatic efferent, general visceral efferent (parasympathetic) and special visceral efferent (muscles of pharyngeal arch origin)."]},
+{h:"Parasympathetic fibres",p:["III through the ciliary ganglion, VII through the pterygopalatine and submandibular ganglia, IX through the otic ganglion, X to thoracic and abdominal viscera."]}],
+terms:[["Nerve nucleus","Collection of cell bodies in the brainstem giving rise to or receiving fibres of a cranial nerve."],["Ptosis","Drooping of the upper eyelid."],["Anosmia","Loss of the sense of smell."],["Diplopia","Double vision."]],
+clin:["Oculomotor palsy: eye down and out, ptosis and a dilated pupil.","Abducent palsy: medial squint and diplopia on looking laterally.","Bell palsy: LMN facial paralysis affecting the whole side of the face. UMN lesion spares the forehead.","Trigeminal neuralgia: severe stabbing pain in the distribution of V2 or V3 most often.","Hypoglossal lesion: tongue deviates toward the side of the lesion on protrusion."],
+pts:["Trochlear is the only cranial nerve to leave the brainstem from the dorsal side and the only one that decussates completely.","Forehead muscles receive bilateral cortical supply, so UMN facial palsy spares them.","Vagus is the longest cranial nerve."],
+mcq:[{q:"Which nerve passes through the foramen rotundum?",o:["Ophthalmic nerve","Maxillary nerve","Mandibular nerve","Facial nerve"],a:1,e:"V2 (maxillary) passes through the foramen rotundum."},{q:"In a complete oculomotor nerve palsy the eye is:",o:["Deviated medially","Down and out","Elevated","Normal in position"],a:1,e:"Unopposed lateral rectus and superior oblique pull the eye down and out."},{q:"On protrusion, the tongue in a unilateral hypoglossal nerve lesion deviates:",o:["Towards the side of the lesion","Away from the side of the lesion","Upward","It does not deviate"],a:0,e:"The genioglossus of the healthy side pushes the tongue toward the weak side."}],
+sa:["Name the cranial nerves passing through the superior orbital fissure.","Write a note on Bell palsy.","Give the parasympathetic ganglia of the head and the nerve related to each."],
+es:["Describe the facial nerve under the following headings: nuclei, course, branches, applied anatomy."]},
+
+{n:5,t:"Brainstem",
+intro:"The brainstem (midbrain, pons and medulla) carries every tract between the brain and cord and contains nuclei of cranial nerves III to XII. Brainstem syndromes are a favourite topic in clinical anatomy.",
+notes:[
+{h:"Medulla oblongata",p:["Pyramids on the anterior surface; decussation of pyramids at the lower end.","Olives lateral to the pyramids (inferior olivary nucleus).","Nucleus gracilis and cuneatus posteriorly; internal arcuate fibres form the sensory decussation and ascend as the medial lemniscus.","Contains nuclei of IX, X, XI (cranial part) and XII; inferior cerebellar peduncle on the side."]},
+{h:"Pons",p:["Basilar part with pontine nuclei and transverse fibres forming the middle cerebellar peduncle.","Tegmentum with nuclei of V, VI, VII and VIII.","Lies in front of the fourth ventricle and cerebellum."]},
+{h:"Midbrain",p:["Tectum (superior colliculus for visual reflexes, inferior colliculus for hearing), tegmentum (red nucleus, substantia nigra) and crus cerebri.","Cerebral aqueduct runs through it.","Nuclei of III and IV; superior cerebellar peduncle enters its tegmentum."]}],
+terms:[["Tegmentum","Central core of the brainstem containing nuclei and the reticular formation."],["Lemniscus","Ribbon-like bundle of sensory fibres in the brainstem."],["Colliculus","Small rounded elevation on the tectum of the midbrain."],["Peduncle","Stalk-like bundle of fibres."]],
+clin:["Medial medullary syndrome: contralateral hemiparesis, loss of medial lemniscus sensation and ipsilateral tongue deviation.","Lateral medullary (Wallenberg) syndrome: usually from posterior inferior cerebellar or vertebral artery occlusion; facial pain and temperature loss on the same side, loss on the opposite side of the body, hoarseness, difficulty swallowing, Horner syndrome and ataxia.","Weber syndrome: midbrain lesion with ipsilateral oculomotor palsy and contralateral hemiplegia.","Parkinson disease: loss of dopaminergic cells in the substantia nigra."],
+pts:["Cranial nerves III to XII arise from the brainstem.","Crossed signs (cranial nerve sign on one side, long tract sign on the other) point to brainstem lesions.","The substantia nigra is the largest nucleus of the midbrain."],
+mcq:[{q:"The pyramidal decussation is situated in the:",o:["Midbrain","Pons","Lower part of the medulla","C5 spinal segment"],a:2,e:"Most corticospinal fibres cross at the lower end of the medulla."},{q:"Weber syndrome results from a lesion in the:",o:["Medulla","Pons","Midbrain","Cerebellum"],a:2,e:"A midbrain lesion damages the oculomotor nerve and the crus cerebri."},{q:"Lateral medullary syndrome is usually caused by occlusion of the:",o:["Anterior cerebral artery","Posterior inferior cerebellar (or vertebral) artery","Middle cerebral artery","Anterior spinal artery"],a:1,e:"PICA or vertebral artery occlusion produces Wallenberg syndrome."}],
+sa:["Describe the external features of the medulla oblongata.","List the structures seen in a transverse section of the midbrain.","Write a short note on Weber syndrome."],
+es:["Describe the internal structure of the medulla at the level of the olives. Add a note on lateral medullary syndrome."]},
+
+{n:6,t:"Cerebellum",
+intro:"The cerebellum coordinates movement, maintains posture and balance, and helps motor learning. It works without conscious control and acts on the same side of the body.",
+notes:[
+{h:"Parts and lobes",p:["Situated in the posterior cranial fossa below the tentorium cerebelli.","Median vermis and two hemispheres.","Lobes: anterior, posterior and flocculonodular.","Functional division: vestibulocerebellum (flocculonodular), spinocerebellum (vermis and intermediate zone) and cerebrocerebellum (lateral hemisphere)."]},
+{h:"Peduncles",p:["Superior: mainly efferent to red nucleus and thalamus.","Middle: afferent only, from pontine nuclei.","Inferior: mainly afferent from spinal cord, olive and vestibular nuclei."]},
+{h:"Deep nuclei and cortex",p:["From lateral to medial: dentate, emboliform, globose and fastigial.","Cortex has three layers: molecular, Purkinje cell layer and granular layer.","Purkinje cells are the only output of the cortex and are inhibitory.","Inputs: climbing fibres (from inferior olive) and mossy fibres (from all other sources)."]}],
+terms:[["Vermis","Median part of the cerebellum."],["Flocculonodular lobe","Oldest part; connected with the vestibular system."],["Purkinje cell","Large flask-shaped neuron forming the output of cerebellar cortex."],["Ataxia","Lack of coordination of voluntary movements."]],
+clin:["Cerebellar lesions cause signs on the same side as the lesion.","Intention tremor, dysdiadochokinesia, nystagmus, hypotonia, scanning speech, past-pointing and rebound phenomenon.","Vermis lesion: truncal ataxia; medulloblastoma in children commonly arises here.","Hemisphere lesion: limb ataxia and an unsteady gait with a tendency to fall to the side of the lesion."],
+pts:["The middle cerebellar peduncle is the largest and is only afferent.","Memory aid for deep nuclei from lateral to medial: Dentate, Emboliform, Globose, Fastigial.","The cerebellum has no direct corticospinal connection but modifies motor output."],
+mcq:[{q:"The only afferent cerebellar peduncle is the:",o:["Superior","Middle","Inferior","All three"],a:1,e:"The middle peduncle carries only pontocerebellar afferents."},{q:"The output neurons of the cerebellar cortex are the:",o:["Purkinje cells","Granule cells","Golgi cells","Basket cells"],a:0,e:"Purkinje cell axons are the only efferents of the cortex."},{q:"Signs of a cerebellar hemisphere lesion appear on the:",o:["Same side","Opposite side","Both sides equally","Neither side"],a:0,e:"Cerebellar pathways cross twice, so the effect is ipsilateral."}],
+sa:["Name the cerebellar nuclei in order.","List the connections of the inferior cerebellar peduncle.","Mention four signs of a cerebellar lesion."],
+es:["Describe the cerebellum under the headings: external features, peduncles, nuclei, functional divisions and applied anatomy."]},
+
+{n:7,t:"Fourth Ventricle",
+intro:"The fourth ventricle is the diamond-shaped cavity of the hindbrain. Its floor is a map of brainstem nuclei and its apertures let CSF leave the ventricular system.",
+notes:[
+{h:"Position and shape",p:["Lies between the pons and upper medulla in front and the cerebellum behind.","Continuous above with the cerebral aqueduct and below with the central canal of the medulla."]},
+{h:"Floor (rhomboid fossa)",p:["Median sulcus divides it into halves; the sulcus limitans separates motor and sensory regions.","Medial eminence contains the facial colliculus, produced by the abducent nucleus with fibres of the facial nerve looping around it.","Below are the hypoglossal triangle and the vagal triangle; laterally lies the vestibular area.","Striae medullares cross the floor."]},
+{h:"Roof and apertures",p:["Roof formed by the superior medullary velum and the inferior medullary velum with tela choroidea and choroid plexus.","Median aperture (foramen of Magendie) and two lateral apertures (foramina of Luschka) open into the subarachnoid space."]}],
+terms:[["Rhomboid fossa","Floor of the fourth ventricle."],["Facial colliculus","Elevation over the abducent nucleus and facial nerve fibres."],["Sulcus limitans","Groove dividing motor nuclei (medial) from sensory nuclei (lateral)."],["Tela choroidea","Double layer of pia mater with ependyma in the roof."]],
+clin:["Blockage of the apertures or aqueduct causes obstructive hydrocephalus.","Tumours near the ventricle: medulloblastoma, ependymoma and brainstem gliomas.","A lesion of the facial colliculus affects the abducent nerve and the facial nerve together.","Dandy-Walker malformation: cystic enlargement of the fourth ventricle with cerebellar vermis hypoplasia."],
+pts:["The fourth ventricle has three apertures and is the only ventricle that drains CSF into the subarachnoid space.","The superior part of the floor lies in the pons, the lower part in the medulla."],
+mcq:[{q:"The median aperture of the fourth ventricle is the foramen of:",o:["Monro","Magendie","Luschka","Rosenthal"],a:1,e:"Magendie is median; Luschka are lateral."},{q:"The facial colliculus is produced by:",o:["Hypoglossal nucleus","Vagal nucleus","Abducent nucleus and looping facial nerve fibres","Vestibular nuclei"],a:2,e:"Facial nerve fibres loop over the abducent nucleus."},{q:"The fourth ventricle communicates above with the:",o:["Cerebral aqueduct","Interventricular foramen","Lateral ventricle directly","Subdural space"],a:0,e:"The cerebral aqueduct connects the third and fourth ventricles."}],
+sa:["Name the boundaries of the fourth ventricle.","Write the apertures of the fourth ventricle.","What is the facial colliculus?"],
+es:["Describe the fourth ventricle: floor, roof, recesses and apertures, with clinical anatomy."]},
+
+{n:8,t:"Cerebrum, Diencephalon, Basal Nuclei and White Matter",
+intro:"The cerebrum is the largest part of the brain and the seat of higher functions. This chapter links cortical areas, thalamus, basal nuclei and the white matter pathways that connect them.",
+notes:[
+{h:"Cerebral hemispheres",p:["Lobes: frontal, parietal, temporal and occipital, with the insula deep to the lateral sulcus.","Main sulci: central, lateral, parieto-occipital and calcarine.","Primary motor area 4 (precentral gyrus); premotor area 6; Broca area 44 and 45; primary somatosensory areas 3, 1, 2 (postcentral gyrus); Wernicke area 22 and nearby 39 and 40; visual area 17; auditory areas 41 and 42.","The body is represented upside down in the motor and sensory homunculus, with large areas for the hand and face."]},
+{h:"Diencephalon",p:["Thalamus: relay station. VPL and VPM relay general sensation, LGB vision, MGB hearing, VL and VA motor circuits.","Hypothalamus: controls autonomic function, temperature, hunger, thirst and the pituitary.","Epithalamus (pineal gland) and subthalamus (subthalamic nucleus)."]},
+{h:"Basal nuclei",p:["Caudate nucleus, putamen and globus pallidus (together the corpus striatum); the lentiform nucleus is putamen plus globus pallidus.","Functionally linked: subthalamic nucleus and substantia nigra.","They plan and smooth movement."]},
+{h:"White matter",p:["Association fibres connect areas of one hemisphere; commissural fibres (corpus callosum, anterior commissure) connect the two hemispheres; projection fibres run to and from the cortex.","Internal capsule: anterior limb, genu and posterior limb. The genu carries corticonuclear fibres; the posterior limb carries corticospinal fibres and thalamocortical sensory fibres."]}],
+terms:[["Gyrus","Raised fold of cerebral cortex."],["Sulcus","Groove between gyri."],["Corpus callosum","Largest commissure joining the two cerebral hemispheres."],["Internal capsule","V-shaped band of projection fibres between the thalamus and lentiform nucleus."],["Aphasia","Disorder of language."]],
+clin:["Broca aphasia (expressive): non-fluent speech with understanding preserved. Wernicke aphasia (receptive): fluent but meaningless speech with poor understanding.","Internal capsule infarct: contralateral hemiplegia, often with facial weakness, because many fibres are compact.","Parkinson disease: loss of dopamine in the substantia nigra; tremor, rigidity, bradykinesia.","Huntington disease: degeneration of the caudate nucleus; chorea.","Hemiballismus: lesion of the subthalamic nucleus.","Thalamic lesion: loss of contralateral sensation and sometimes severe thalamic pain."],
+pts:["The lenticulostriate branches of the middle cerebral artery supply the internal capsule and are the commonest site of cerebral haemorrhage.","Broca and Wernicke areas are in the dominant (usually left) hemisphere.","All sensory pathways except smell synapse in the thalamus."],
+mcq:[{q:"Broca motor speech area corresponds to Brodmann areas:",o:["4 and 6","44 and 45","41 and 42","17 and 18"],a:1,e:"Broca area is in the inferior frontal gyrus, areas 44 and 45."},{q:"The artery most associated with capsular haemorrhage is the:",o:["Basilar artery","Anterior spinal artery","Lenticulostriate branch of the middle cerebral artery","Posterior communicating artery"],a:2,e:"Lenticulostriate arteries are end arteries prone to rupture."},{q:"Parkinson disease is due to loss of neurons in the:",o:["Caudate nucleus","Substantia nigra","Subthalamic nucleus","Cerebellum"],a:1,e:"Dopaminergic neurons of the substantia nigra degenerate."}],
+sa:["List the functional areas of the cerebral cortex with their Brodmann numbers.","Name the nuclei of the thalamus and one connection of each.","Describe the parts and blood supply of the internal capsule."],
+es:["Describe the basal nuclei under the headings: parts, connections, functions and applied anatomy."]},
+
+{n:9,t:"Third Ventricle, Lateral Ventricle and Limbic System",
+intro:"The ventricles are fluid-filled cavities of the brain and the limbic system forms the circuit of emotion and memory. The two are grouped because both curve around the thalamus and corpus callosum.",
+notes:[
+{h:"Third ventricle",p:["Narrow midline cleft between the two thalami and hypothalami.","Anterior wall: lamina terminalis and anterior commissure. Roof: tela choroidea. Floor: hypothalamic structures.","Communicates with the lateral ventricles through the interventricular foramina and with the fourth ventricle through the cerebral aqueduct.","Recesses: optic, infundibular, pineal and suprapineal."]},
+{h:"Lateral ventricle",p:["C-shaped cavity in each hemisphere with an anterior horn, body, posterior horn, inferior horn and an atrium (trigone).","Choroid plexus is present in the body and inferior horn but not in the anterior or posterior horns.","The head of the caudate bulges into the anterior horn; the hippocampus lies in the floor of the inferior horn."]},
+{h:"Limbic system",p:["Limbic lobe (subcallosal, cingulate and parahippocampal gyri), hippocampal formation, amygdala, hypothalamus and mamillary bodies, anterior thalamic nucleus and septal area.","Papez circuit: hippocampus, fornix, mamillary body, mamillothalamic tract, anterior thalamic nucleus, cingulate gyrus, parahippocampal gyrus and back to the hippocampus.","Functions: emotion, memory, behaviour and autonomic responses."]}],
+terms:[["Interventricular foramen","Opening between the lateral ventricle and third ventricle (foramen of Monro)."],["Fornix","C-shaped bundle carrying hippocampal output to the mamillary body."],["Hippocampus","Curved gyrus in the temporal lobe important for memory."],["Amygdala","Almond-shaped nucleus involved in fear and emotion."]],
+clin:["Hydrocephalus from blockage at the interventricular foramen, aqueduct or fourth ventricle apertures.","Alzheimer disease: early atrophy of the hippocampus with memory loss.","Bilateral amygdala lesion: Kluver-Bucy syndrome.","Wernicke-Korsakoff syndrome: mamillary body damage from thiamine deficiency."],
+pts:["The aqueduct is the narrowest part of the ventricular system and a common site of obstruction.","The septum pellucidum separates the anterior horns of the lateral ventricles."],
+mcq:[{q:"Choroid plexus is absent in the:",o:["Body of the lateral ventricle","Inferior horn","Anterior horn","Third ventricle"],a:2,e:"The anterior and posterior horns have no choroid plexus."},{q:"Which structure is part of the Papez circuit?",o:["Red nucleus","Mamillary body","Substantia nigra","Inferior colliculus"],a:1,e:"The mamillary body relays fornix fibres to the anterior thalamic nucleus."},{q:"The interventricular foramen connects:",o:["Lateral and third ventricles","Third and fourth ventricles","Fourth ventricle and subarachnoid space","Lateral ventricle and subarachnoid space"],a:0,e:"It is also called the foramen of Monro."}],
+sa:["Write the boundaries of the third ventricle.","List the parts of the lateral ventricle.","Write the circuit of Papez."],
+es:["Describe the lateral ventricle with its parts, relations and choroid plexus."]},
+
+{n:10,t:"Some Neural Pathways and Reticular Formation",
+intro:"This chapter follows important sensory and motor pathways from start to finish and introduces the reticular formation, which maintains consciousness.",
+notes:[
+{h:"Dorsal column - medial lemniscus pathway",p:["First order neuron: dorsal root ganglion; fibres ascend in the fasciculus gracilis or cuneatus to the medulla.","Second order neuron: nucleus gracilis or cuneatus; fibres cross as internal arcuate fibres and ascend in the medial lemniscus to the thalamus (VPL).","Third order neuron: thalamus to the postcentral gyrus."]},
+{h:"Spinothalamic pathway",p:["First order neuron: dorsal root ganglion; second order neuron in the dorsal horn crosses in the anterior white commissure; third order neuron in the thalamus (VPL) to the sensory cortex."]},
+{h:"Corticospinal pathway",p:["Motor cortex, corona radiata, posterior limb of the internal capsule, crus cerebri, pons, pyramid of the medulla.","About 80-90 percent of fibres cross at the pyramidal decussation to form the lateral corticospinal tract; the rest run as the anterior corticospinal tract."]},
+{h:"Visual pathway",p:["Retina, optic nerve, optic chiasma (nasal fibres cross), optic tract, lateral geniculate body, optic radiation and visual cortex (area 17)."]},
+{h:"Reticular formation",p:["Diffuse network of neurons in the core of the brainstem.","Ascending reticular activating system (ARAS) maintains wakefulness; raphe nuclei release serotonin and the locus ceruleus releases noradrenaline.","Roles: consciousness, sleep-wake cycle, muscle tone, cardiovascular and respiratory control and pain modulation."]}],
+terms:[["Pathway","Chain of neurons conveying a particular type of information."],["Hemianopia","Loss of half of the visual field."],["ARAS","Ascending reticular activating system."],["Medial lemniscus","Tract carrying fine touch and proprioception from the medulla to the thalamus."]],
+clin:["Optic chiasma lesion (for example pituitary tumour): bitemporal hemianopia.","Optic tract or radiation lesion: contralateral homonymous hemianopia.","Optic nerve lesion: blindness in the affected eye.","Damage to the ARAS in the upper brainstem: coma.","Dorsal column damage (tabes dorsalis): loss of vibration and position sense with sensory ataxia."],
+pts:["Fine touch crosses in the medulla; pain and temperature cross in the cord.","Auditory pathways are bilateral, so unilateral brain lesions rarely cause deafness.","Corticospinal fibres are somatotopically organised."],
+mcq:[{q:"A pituitary tumour compressing the optic chiasma typically causes:",o:["Binasal hemianopia","Bitemporal hemianopia","Homonymous hemianopia","Blindness in one eye"],a:1,e:"Crossing nasal retinal fibres are compressed, giving bitemporal field loss."},{q:"Fibres of the dorsal column pathway decussate in the:",o:["Spinal cord","Medulla","Pons","Thalamus"],a:1,e:"Second order fibres cross as internal arcuate fibres."},{q:"The ascending reticular activating system is related to:",o:["Wakefulness and consciousness","Visual acuity","Fine touch","Taste"],a:0,e:"ARAS projects to the thalamus and cortex to maintain alertness."}],
+sa:["Trace the pathway of fine touch from the hand to the cortex.","Write a short note on the optic pathway and its lesions.","List the functions of the reticular formation."],
+es:["Describe the corticospinal tract with its course and applied anatomy."]},
+
+{n:11,t:"Blood Supply of Spinal Cord and Brain",
+intro:"The brain depends on a continuous blood supply from the internal carotid and vertebral arteries, joined at the base by the circle of Willis. Vascular territories are the basis for localising stroke.",
+notes:[
+{h:"Arterial supply of the brain",p:["Anterior circulation: internal carotid artery giving the ophthalmic, posterior communicating, anterior choroidal, anterior cerebral and middle cerebral arteries.","Posterior circulation: two vertebral arteries join to form the basilar artery, which ends as the two posterior cerebral arteries.","Circle of Willis joins both systems through the anterior and posterior communicating arteries."]},
+{h:"Territories",p:["Anterior cerebral artery: medial surface of the frontal and parietal lobes, including the leg area.","Middle cerebral artery: lateral surface including the face and arm area and speech areas; gives lenticulostriate branches.","Posterior cerebral artery: occipital lobe and inferior temporal lobe."]},
+{h:"Venous drainage",p:["Superficial and deep cerebral veins drain to dural venous sinuses: superior and inferior sagittal, straight, transverse and sigmoid sinuses, which end in the internal jugular vein.","Great cerebral vein (of Galen) joins the inferior sagittal sinus to form the straight sinus."]},
+{h:"Spinal cord",p:["One anterior spinal artery and two posterior spinal arteries, reinforced by radicular arteries.","The great anterior radicular artery (of Adamkiewicz) usually arises on the left in the lower thoracic or upper lumbar region and supplies the lower cord."]}],
+terms:[["Circle of Willis","Arterial anastomosis at the base of the brain."],["Berry aneurysm","Small saccular aneurysm of cerebral arteries."],["Infarct","Area of tissue death due to loss of blood supply."],["Macular sparing","Preservation of central vision in a posterior cerebral artery occlusion."]],
+clin:["Middle cerebral artery occlusion: contralateral weakness and sensory loss of the face and arm, with aphasia if the dominant hemisphere is involved.","Anterior cerebral artery occlusion: contralateral weakness of the leg more than the arm.","Posterior cerebral artery occlusion: contralateral homonymous hemianopia with macular sparing.","Berry aneurysms are commonest at junctions on the circle of Willis, especially the anterior communicating artery region.","Anterior spinal artery occlusion: loss of motor function and pain-temperature sensation below the level, with dorsal columns preserved."],
+pts:["The middle cerebral artery is the commonest artery involved in stroke.","The circle of Willis allows collateral circulation but is complete in only a minority of people.","The dural venous sinuses have no valves."],
+mcq:[{q:"Occlusion of the anterior cerebral artery mainly weakens the:",o:["Contralateral face","Ipsilateral arm","Contralateral lower limb","Both eyes"],a:2,e:"The leg area lies on the medial surface of the hemisphere."},{q:"The artery of Adamkiewicz reinforces the supply of the:",o:["Brainstem","Lower thoracolumbar spinal cord","Cerebellum","Thalamus"],a:1,e:"It is the largest anterior radicular artery."},{q:"The great cerebral vein joins the inferior sagittal sinus to form the:",o:["Straight sinus","Sigmoid sinus","Transverse sinus","Cavernous sinus"],a:0,e:"This forms the straight sinus."}],
+sa:["Write the formation and branches of the circle of Willis.","Name the territories of the cerebral arteries.","Describe the blood supply of the spinal cord."],
+es:["Describe the arterial supply of the brain with its clinical significance."]},
+
+{n:12,t:"Investigations of a Neurological Case, Surface and Radiological Anatomy",
+intro:"This chapter links anatomy with the bedside. It covers the tests used to study the nervous system, the surface markings of important brain structures and how the brain appears on scans.",
+notes:[
+{h:"Clinical examination",p:["Higher mental functions, cranial nerves, motor system (tone, power, reflexes), sensory system and cerebellar tests.","Anatomical knowledge helps decide whether a lesion is in the brain, brainstem, spinal cord or a peripheral nerve."]},
+{h:"Investigations",p:["Lumbar puncture and CSF analysis.","CT scan: fast and best for acute bleeding and bone.","MRI: best for soft tissue, brainstem, cerebellum and spinal cord.","Angiography (DSA, CT or MR angiography) for blood vessels.","EEG for brain electrical activity; EMG and nerve conduction studies for muscles and nerves."]},
+{h:"Lumbar puncture",p:["Performed with the patient in a curled lateral position; the line joining the highest points of the iliac crests crosses the L4 spine.","Needle passes through skin, fascia, supraspinous and interspinous ligaments, ligamentum flavum, epidural space, dura and arachnoid into the subarachnoid space (lumbar cistern)."]},
+{h:"Surface and radiological anatomy",p:["Surface markings of the central sulcus, lateral sulcus and middle meningeal artery are drawn on the scalp using landmarks such as the nasion, inion and pterion. Use the textbook for exact lines.","On T1 MRI the CSF is dark and on T2 it is bright.","CT is read in axial slices from the skull base upward."]}],
+terms:[["Nasion","Midpoint of the frontonasal suture."],["Inion","Prominence on the external occipital protuberance."],["Pterion","Point on the side of the skull where frontal, parietal, temporal and sphenoid meet."],["Lumbar cistern","Subarachnoid space below the end of the spinal cord containing the cauda equina."]],
+clin:["Raised intracranial pressure is a contraindication to lumbar puncture because of the risk of herniation.","Post-lumbar puncture headache results from CSF leak.","CT is the first test in suspected stroke or head injury; MRI is preferred for demyelinating disease.","Papilloedema is a sign of raised intracranial pressure."],
+pts:["In adults lumbar puncture is performed at L3-L4 or L4-L5.","The conus medullaris lies above the puncture site, so the cord is safe.","MRI uses no ionising radiation; CT does."],
+mcq:[{q:"In adults lumbar puncture is done at:",o:["L1-L2","L3-L4 or L4-L5","S1-S2","T12-L1"],a:1,e:"These levels are below the end of the cord."},{q:"The first imaging test for acute intracranial bleeding is usually:",o:["MRI","CT scan","Plain skull X-ray","EEG"],a:1,e:"CT is quick and shows fresh blood well."},{q:"The pterion overlies the:",o:["Anterior division of the middle meningeal artery","Posterior division of the middle meningeal artery","Sigmoid sinus","Superior sagittal sinus"],a:0,e:"Hence the danger of extradural haemorrhage after a fracture here."}],
+sa:["List the layers pierced in a lumbar puncture.","Compare CT and MRI of the brain.","Write the surface landmarks used for marking the middle meningeal artery."],
+es:["Describe the anatomical basis of lumbar puncture and mention its complications."]},
+
+{n:13,t:"Autonomic Nervous System",
+intro:"The autonomic nervous system regulates involuntary functions of glands, smooth muscle and the heart. It has two parts, sympathetic and parasympathetic, that usually oppose each other.",
+notes:[
+{h:"General plan",p:["Efferent pathway has two neurons: a preganglionic neuron in the CNS and a postganglionic neuron in a ganglion.","Preganglionic fibres of both parts release acetylcholine; postganglionic parasympathetic fibres release acetylcholine; postganglionic sympathetic fibres release noradrenaline (sweat glands are an exception).","Adrenal medulla acts like a modified sympathetic ganglion."]},
+{h:"Sympathetic system",p:["Thoracolumbar outflow: lateral horn cells of T1 to L2.","Sympathetic trunk lies on each side of the vertebral column with 3 cervical, 11 or 12 thoracic, 4 lumbar and 4 sacral ganglia, and one ganglion impar.","White rami communicantes carry preganglionic fibres into the trunk; grey rami carry postganglionic fibres back to spinal nerves.","Splanchnic nerves (greater, lesser, least) carry preganglionic fibres to prevertebral ganglia."]},
+{h:"Parasympathetic system",p:["Craniosacral outflow: cranial nerves III, VII, IX, X and sacral segments S2-S4.","Cranial ganglia: ciliary (III), pterygopalatine and submandibular (VII) and otic (IX).","Vagus supplies thoracic and abdominal viscera up to the proximal two-thirds of the transverse colon; pelvic splanchnic nerves supply the rest and pelvic organs."]},
+{h:"Main effects",p:["Sympathetic: pupil dilation, increased heart rate, bronchodilation, reduced gut activity and sweating, preparing the body for stress.","Parasympathetic: pupil constriction, slower heart rate, increased gut activity and secretions."]}],
+terms:[["Preganglionic fibre","Axon from the CNS to an autonomic ganglion."],["Ramus communicans","Connecting branch between a spinal nerve and the sympathetic trunk."],["Splanchnic nerve","Visceral branch carrying autonomic fibres."],["Ganglion impar","Unpaired ganglion at the lower end of the sympathetic trunk."]],
+clin:["Horner syndrome: ptosis, miosis, anhidrosis and enophthalmos from loss of sympathetic supply to the head.","Raynaud disease: episodic vasospasm of the fingers; sympathectomy may help.","Hirschsprung disease: absence of parasympathetic ganglion cells in the distal gut.","Cervical sympathetic ganglia may be affected by tumours of the lung apex (Pancoast tumour)."],
+pts:["Sympathetic = thoracolumbar (T1-L2); parasympathetic = craniosacral.","The stellate ganglion is the fusion of the inferior cervical and first thoracic ganglia.","Sympathetic supply to the head leaves the cord at T1-T2."],
+mcq:[{q:"The sympathetic outflow is from segments:",o:["C1-T1","T1-L2","S2-S4","L2-S1"],a:1,e:"Lateral horn cells exist from T1 to L2."},{q:"The ciliary ganglion is a parasympathetic ganglion of the:",o:["Oculomotor nerve","Facial nerve","Glossopharyngeal nerve","Vagus nerve"],a:0,e:"Fibres from the Edinger-Westphal nucleus travel with the oculomotor nerve."},{q:"Horner syndrome includes:",o:["Mydriasis and exophthalmos","Ptosis, miosis and anhidrosis","Dilated pupil and sweating","Proptosis and lid retraction"],a:1,e:"Loss of sympathetic supply causes these signs."}],
+sa:["Differentiate the sympathetic and parasympathetic systems.","Name the parasympathetic ganglia of the head.","Write a short note on Horner syndrome."],
+es:["Describe the sympathetic trunk: extent, ganglia, branches and applied anatomy."]}
+];
+
+var APPX = {n:"A",t:"Appendix",appendix:true};
+var ITEMS = CH.concat([APPX]);
+
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function $(id){return document.getElementById(id);}
+function go(h){location.hash=h;}
+
+function buildToc(){
+  var h="";
+  ITEMS.forEach(function(c,i){
+    var label = c.appendix ? "A" : c.n;
+    var key = c.appendix ? "appendix" : "ch-"+c.n;
+    h+='<li><button onclick="go(\''+key+'\')"><span class="no">'+label+'</span><span>'+esc(c.t)+'<span class="st">'+(c.appendix?"Contents to be added":"Study notes, MCQs and questions")+'</span></span></button></li>';
+  });
+  $("tocList").innerHTML=h;
+}
+
+function ul(a){return "<ul>"+a.map(function(x){return "<li>"+esc(x)+"</li>";}).join("")+"</ul>";}
+
+function chapterHtml(i){
+  var c=ITEMS[i];
+  var prev=i>0?ITEMS[i-1]:null, next=i<ITEMS.length-1?ITEMS[i+1]:null;
+  function key(x){return x.appendix?"appendix":"ch-"+x.n;}
+  var nav='<div class="nav">'+
+    '<button '+(prev?'onclick="go(\''+key(prev)+'\')"':'disabled')+'>&larr; Previous</button>'+
+    '<button class="idx" onclick="go(\'toc\')">Back to Index</button>'+
+    '<button '+(next?'onclick="go(\''+key(next)+'\')"':'disabled')+'>Next &rarr;</button></div>';
+  var h='<div class="chhead"><div class="n">'+(c.appendix?"APPENDIX":"CHAPTER "+c.n)+'</div><h1>'+esc(c.t)+'</h1></div>';
+  if(c.appendix){
+    h+='<div class="sec"><h2>Appendix</h2><div class="ph">The Appendix is listed in the book&rsquo;s contents. Its exact title and content could not be verified online, so this page is a labelled placeholder. Add the verified appendix content here later.</div></div>'+nav;
+    return h;
+  }
+  var chips=["Introduction","Study Notes","Terms","Diagrams","Clinical Anatomy","Important Points","MCQs","Short Answers","Essays"];
+  h+='<div class="chips">'+chips.map(function(t,k){return '<button onclick="jump(\'s'+(k+1)+'\')">'+t+'</button>';}).join("")+'</div>';
+  h+=nav;
+  h+='<div class="sec" id="s1"><h2>1. Chapter Introduction</h2><p>'+esc(c.intro)+'</p></div>';
+  h+='<div class="sec" id="s2"><h2>2. Detailed Study Notes</h2><p class="src">Original summary notes prepared for BPT students. Topic headings below are supplementary study topics, not the textbook&rsquo;s own headings.</p>';
+  c.notes.forEach(function(n){h+='<h3>'+esc(n.h)+'</h3>'+ul(n.p);});
+  h+='</div>';
+  h+='<div class="sec" id="s3"><h2>3. Important Anatomical Terms</h2>'+c.terms.map(function(t){return '<div class="term"><b>'+esc(t[0])+'</b><span>'+esc(t[1])+'</span></div>';}).join("")+'</div>';
+  h+='<div class="sec" id="s4"><h2>4. Diagrams and Illustrations</h2>';
+  if(c.img&&c.img.length){h+=c.img.map(function(s){return '<p><img src="'+esc(s)+'" alt="Diagram"></p>';}).join("");}
+  else{h+='<div class="ph">No diagrams added yet. Upload labelled diagrams for this chapter and list their file names in the <code>img</code> field of this chapter.</div>';}
+  h+='</div>';
+  h+='<div class="sec" id="s5"><h2>5. Clinical Anatomy</h2>'+ul(c.clin)+'</div>';
+  h+='<div class="sec" id="s6"><h2>6. Important Points</h2>'+c.pts.map(function(p){return '<div class="def">'+esc(p)+'</div>';}).join("")+'</div>';
+  h+='<div class="sec" id="s7"><h2>7. MCQ Questions</h2><p class="src">Practice questions written for this site. They are not previous-year questions.</p><div id="mcqBox"></div><div class="score" id="score"></div></div>';
+  h+='<div class="sec" id="s8"><h2>8. Short Answer Questions</h2>'+ul(c.sa)+'</div>';
+  h+='<div class="sec" id="s9"><h2>9. Essay Questions</h2>'+ul(c.es)+'</div>';
+  h+=nav;
+  return h;
+}
+
+function jump(id){var e=$(id);if(e)e.scrollIntoView({behavior:"smooth"});}
+
+var done=0,right=0,total=0;
+function renderMcq(c){
+  var box=$("mcqBox");done=0;right=0;total=c.mcq.length;
+  box.innerHTML="";
+  c.mcq.forEach(function(m,qi){
+    var d=document.createElement("div");d.className="q";
+    var p=document.createElement("p");p.textContent=(qi+1)+". "+m.q;d.appendChild(p);
+    var ex=document.createElement("div");ex.className="exp hidden";ex.textContent="Answer: "+m.o[m.a]+". "+m.e;
+    var btns=[];
+    m.o.forEach(function(o,oi){
+      var b=document.createElement("button");b.className="opt";b.textContent=String.fromCharCode(65+oi)+". "+o;
+      b.onclick=function(){
+        btns.forEach(function(x){x.disabled=true;});
+        if(oi===m.a){b.classList.add("right");right++;}else{b.classList.add("wrong");btns[m.a].classList.add("right");}
+        ex.classList.remove("hidden");done++;
+        if(done===total){$("score").textContent="Score: "+right+" / "+total;}
+      };
+      btns.push(b);d.appendChild(b);
+    });
+    d.appendChild(ex);box.appendChild(d);
+  });
+}
+
+function route(){
+  var h=location.hash.replace("#","");
+  $("vCard").classList.add("hidden");$("vToc").classList.add("hidden");$("vChap").classList.add("hidden");
+  $("barIndex").style.visibility="visible";
+  if(h==="toc"){
+    $("vToc").classList.remove("hidden");$("barTitle").textContent="Book A \u00b7 Contents";
+  }else if(h==="appendix"||/^ch-\d+$/.test(h)){
+    var idx=h==="appendix"?ITEMS.length-1:parseInt(h.split("-")[1],10)-1;
+    if(!ITEMS[idx]||(h!=="appendix"&&ITEMS[idx].appendix)){go("toc");return;}
+    $("vChap").innerHTML=chapterHtml(idx);$("vChap").classList.remove("hidden");
+    $("barTitle").textContent=ITEMS[idx].appendix?"Appendix":"Chapter "+ITEMS[idx].n+" \u00b7 "+ITEMS[idx].t;
+    if(!ITEMS[idx].appendix)renderMcq(ITEMS[idx]);
+  }else{
+    $("vCard").classList.remove("hidden");$("barTitle").textContent="Anatomy \u00b7 Book A";$("barIndex").style.visibility="hidden";
+  }
+  window.scrollTo(0,0);
+}
+buildToc();
+window.addEventListener("hashchange",route);
+route();
+</script>
+</body>
+</html>
